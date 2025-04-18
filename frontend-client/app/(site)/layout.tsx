@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import Header from "@/app/components/layout/Header";
 import Footer from "@/app/components/layout/Footer";
 import { AuthProvider } from "@/app/contexts/AuthContext";
+import { SectionProvider } from "@/app/contexts/SectionContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,12 +36,14 @@ export default function SiteLayout({
   return (
     <>
       <AuthProvider>
-        <Header />
-        <main className="h-screen flex container mx-auto px-4 py-8">
-          {children}
-        </main>
+        <SectionProvider>
+          <Header />
+          <main className="h-screen flex container mx-auto px-4 py-8">
+            {children}
+          </main>
 
-        <Footer />
+          <Footer />
+        </SectionProvider>
       </AuthProvider>
     </>
   );

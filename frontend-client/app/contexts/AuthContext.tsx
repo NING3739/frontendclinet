@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { authService } from "@/app/services/authService";
 import type { LogInPayload } from "@/app/types/authType";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ interface AuthContextType {
   logout: () => Promise<void>;
   loading: boolean;
   isAuthenticated: boolean;
+  setIsAuthenticated: (value: boolean) => void;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -19,7 +20,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const login = async (payload: LogInPayload) => {
@@ -54,8 +55,33 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // 挂载时检查是否已登录
+  useEffect(() => {
+    const checkLogInStatus = async () => {
+      try {
+        const response = await authService.checkLogInStatus();
+        console.log("Header - isAuthenticated:", response);
+        if (response.success === true) {
+          setIsAuthenticated(true);
+        } else {
+          console.log("Header - isAuthenticated:", response);
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error("Error checking login status:", error);
+        setIsAuthenticated(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+    // 调用检查登录状态的函数
+    checkLogInStatus();
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ login, logout, loading, isAuthenticated }}>
+    <AuthContext.Provider
+      value={{ login, logout, loading, isAuthenticated, setIsAuthenticated }}
+    >
       {children}
     </AuthContext.Provider>
   );

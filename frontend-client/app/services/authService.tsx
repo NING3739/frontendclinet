@@ -76,9 +76,9 @@ class AuthService {
   async checkLogInStatus(): Promise<ApiResponse> {
     const response = await apiService.request({
       method: "GET",
-      url: "/auth/check-log-in-status",
+      url: "/auth/check-login-status",
     });
-    handleApiError(response, "非法访问", "error");
+    console.log("checkLogInStatus response:", response);
     return response.data;
   }
 
