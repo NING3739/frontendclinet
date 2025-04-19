@@ -3,15 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import {
-  Heart,
-  Map,
-  UserCircle2,
-  History,
-  ExternalLink,
-  Globe,
-  LucideIcon,
-} from "lucide-react";
+import { Heart, Map, UserCircle2, History, Globe } from "lucide-react";
 import { useLanguage } from "@/app/hooks/useLanguage";
 import { useGetText } from "@/app/lib/utils/i18n";
 import { Logo } from "@/app/components/ui/Logo";

@@ -60,15 +60,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const checkLogInStatus = async () => {
       try {
         const response = await authService.checkLogInStatus();
-        console.log("Header - isAuthenticated:", response);
-        if (response.success === true) {
+        console.log("登录状态检查响应:", response.data);
+
+        // 根据API响应的结构调整这里的判断逻辑
+        if (response.success && response.data === true) {
           setIsAuthenticated(true);
         } else {
-          console.log("Header - isAuthenticated:", response);
           setIsAuthenticated(false);
         }
       } catch (error) {
-        console.error("Error checking login status:", error);
+        console.error("检查登录状态失败:", error);
         setIsAuthenticated(false);
       } finally {
         setLoading(false);

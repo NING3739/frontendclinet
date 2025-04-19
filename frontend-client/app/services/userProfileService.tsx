@@ -10,7 +10,7 @@ class UserProfileService {
       url: "/user-profile/show-my-profile",
     });
     handleApiError(response);
-    return response.data;
+    return response;
   }
 
   async showOtherProfile(user_id: number): Promise<ApiResponse> {
@@ -23,7 +23,7 @@ class UserProfileService {
       data: { user_id },
     });
     handleApiError(response);
-    return response.data;
+    return response;
   }
 
   async updateMyProfile(payload: UpdateMyProfilePayload): Promise<ApiResponse> {
@@ -33,7 +33,7 @@ class UserProfileService {
       data: payload,
     });
     handleApiError(response);
-    return response.data;
+    return response;
   }
 }
 

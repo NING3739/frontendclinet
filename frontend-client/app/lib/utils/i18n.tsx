@@ -98,6 +98,23 @@ export const translations: Record<string, Record<Language, string>> = {
     english: "Forget password, Reset password, Little Li's Life Diary",
     chinese: "忘记密码, 重置密码, 小李生活志",
   },
+  // Header
+  logout: {
+    english: "Logout",
+    chinese: "登出",
+  },
+  settings: {
+    english: "Settings",
+    chinese: "设置",
+  },
+  dashboard: {
+    english: "Dashboard",
+    chinese: "仪表盘",
+  },
+  profile: {
+    english: "Profile",
+    chinese: "个人资料",
+  },
 
   // Footer
   tagline: {

@@ -78,8 +78,7 @@ class AuthService {
       method: "GET",
       url: "/auth/check-login-status",
     });
-    console.log("checkLogInStatus response:", response);
-    return response.data;
+    return response;
   }
 
   async refreshAccessToken(): Promise<ApiResponse> {
@@ -87,8 +86,7 @@ class AuthService {
       method: "PATCH",
       url: "/auth/refresh-access-token",
     });
-    handleApiError(response);
-    return response.data;
+    return response;
   }
 
   async githubLogin(): Promise<ApiResponse> {
